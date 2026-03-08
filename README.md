@@ -13,19 +13,22 @@ The system acts as a centralized middleware connecting citizens directly to hosp
 ### 🔄 Service Orchestration Diagram
 ```mermaid
 graph TD
-    subgraph Client_Layer [User Interface]
-        User[Patient / User] -->|HTTPS/JSON| LINE[LINE Messaging Platform]
-    end
+    %% User Layer
+    User[Patient / Citizen] --- LINE[LINE Official Account]
 
-    subgraph Orchestration_Layer [Serverless Logic - Node.js/GAS]
-        LINE -->|Webhook Event| Gateway{Digital Health Gateway}
-        Gateway -->|Route| Tele[Telemedicine: Next.js + Vercel]
-        Gateway -->|Query| FAQ[Knowledge Base: Google Apps Script]
-        Gateway -->|Fetch| Trad[Static Content Service]
-        Gateway -->|Stream| News[Municipal News Feed API]
-    end
+    %% Webhook Event Layer
+    LINE --> Webhook{LINE Webhook: Next.js}
 
-    subgraph Data_Layer [Persistence & Storage]
-        Tele -->|ACID Transaction| DB[(Patient Database)]
-        FAQ -->|Lookup| Sheet[(Cloud Knowledge Base)]
-    end
+    %% Service & Payload Orchestration
+    Webhook --> Tele[Telemedicine: Next.js]
+    Webhook --> FAQ[FAQ: Flex Payload]
+    Webhook --> Roster[Medical Roster]
+    Webhook --> News[News Feed API]
+
+    %% Data Layer
+    Tele --- DB[(Patient Database)]
+
+    %% Styling
+    style Webhook fill:#f9f,stroke:#333,stroke-width:2px
+    style LINE fill:#28a745,color:#fff
+    style Tele fill:#000,color:#fff
