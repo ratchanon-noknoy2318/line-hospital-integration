@@ -1,12 +1,9 @@
-# LINE Hospital Integration
+# LINE Hospital Integration System
 
-![LINE OA Active](https://img.shields.io/badge/LINE%20OA-Active-brightgreen)
-
-Webhook-based integration service connecting hospital systems with LINE Official Account to automate patient communication and service access.
-
-Enables structured, automated patient interactions through messaging workflows in real-world healthcare environments.
+Webhook-based integration platform connecting hospital backend systems with LINE Official Account to enable automated, structured patient communication in production healthcare environments.
 
 ---
+
 
 ## Impact
 
